@@ -7,15 +7,6 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        // Tabel Users
-        Schema::create('users', function (Blueprint $table) {
-            $table->string('nama_id')->primary(); // Example: BUDI_123
-            $table->string('nama');
-            $table->enum('role', ['admin', 'user']);
-            $table->string('password');
-            $table->timestamps();
-        });
-
         // Tabel Categories
         Schema::create('categories', function (Blueprint $table) {
             $table->string('id')->primary(); // Example: CAT001
@@ -69,13 +60,14 @@ return new class extends Migration {
             $table->timestamps();
 
             $table->foreign('kode_item')->references('kode_item')->on('items')->onDelete('cascade');
-            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('set null');
+            $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('cascade');
         });
 
         // Tabel Withdraw Logs (Barang Keluar)
         Schema::create('withdraw_logs', function (Blueprint $table) {
             $table->string('id')->primary(); // Example: OUT001
             $table->string('kode_item');
+            // $table->string('nama_id');
             $table->string('nama_item');
             $table->string('warna');
             $table->string('size');
