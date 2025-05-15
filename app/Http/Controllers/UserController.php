@@ -1,21 +1,27 @@
 <?php
-use App\Http\Controllers\Controller;
-use public
 
-public function index()
-{
-    $users = User::all();
-    return view('users.index', compact('users'));
-}
+namespace App\Http\Controllers;
 
-public function toggleRole(User $user)
+use App\Models\User;
+use Illuminate\Http\Request;
+
+class UserController extends Controller
 {
-    if ($user->role === 'admin') {
-        $user->role = 'user';
-    } else {
-        $user->role = 'admin';
+    public function index()
+    {
+        $users = User::all();
+        return view('users.index', compact('users'));
     }
-    $user->save();
 
-    return back()->with('success', 'Role updated successfully!');
+    public function toggleRole(User $user)
+    {
+        if ($user->role === 'admin') {
+            $user->role = 'user';
+        } else {
+            $user->role = 'admin';
+        }
+        $user->save();
+
+        return back()->with('success', 'Role updated successfully!');
+    }
 }

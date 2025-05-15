@@ -2,51 +2,64 @@
 
 namespace App\Http\Controllers;
 
-use App\Helpers\IdGenerator;
 use Illuminate\Http\Request;
 use App\Models\WithdrawLog;
 use App\Models\Item;
-use App\Models\User;
-use Illuminate\Support\Facades\Auth;
+use App\Models\ActivityLog;
 
 class WithdrawLogController extends Controller
 {
+    public function index()
+    {
+        $logs = WithdrawLog::with('item')->latest()->paginate(10);
+        return view('withdraw.index', compact('logs'));
+    }
+
+    public function create()
+    {
+        $items = Item::all();
+        return view('withdraw.create', compact('items'));
+    }
+
     public function store(Request $request)
     {
         $request->validate([
-            'kode_item'   => 'required|exists:items,kode_item',
-            'jumlah'      => 'required|integer|min:1',
-            'deskripsi'   => 'nullable|string',
+            'kode_item'            => 'required|exists:items,kode_item',
+            'jumlah'               => 'required|integer|min:1',
+            'nama_pengambil'       => 'required|string',
+            'deskripsi'            => 'nullable|string',
+            'tanggal_pengambilan'  => 'required|date',
         ]);
 
-        // Ambil data item
         $item = Item::where('kode_item', $request->kode_item)->first();
 
-        // Cek stok cukup atau nggak
         if ($item->stok < $request->jumlah) {
-            return response()->json(['message' => 'Stok tidak mencukupi!'], 400);
+            return back()->with('error', 'Stok tidak cukup untuk pengambilan!');
         }
 
-        $id = IdGenerator::generateId('OUT', 'withdraw_logs');
+        // Buat log barang keluar
+        WithdrawLog::create([
+            'id'                   => uniqid('OUT'),
+            'kode_item'            => $request->kode_item,
+            'jumlah'               => $request->jumlah,
+            'nama_id'              => auth()->user()->nama_id,
+            'nama_pengambil'       => $request->nama_pengambil,
+            'deskripsi'            => $request->deskripsi,
+            'tanggal_pengambilan'  => $request->tanggal_pengambilan,
+        ]);
 
-        // Kurangi stok
+        // Update stok: stok berkurang
         $item->stok -= $request->jumlah;
         $item->save();
 
-        // Simpan log pengambilan
-        WithdrawLog::create([
-            'id'               => $id,
-            'kode_item'        => $item->kode_item,
-            'nama_item'        => $item->nama_item,
-            'warna'            => $item->warna,
-            'size'             => $item->size,
-            'jumlah'           => $request->jumlah,
-            'nama_id'          => Auth::user()->nama_id, // Ambil dari user yang login
-            'nama_pengambil'   => Auth::user()->nama,    // Ambil dari user yang login
-            'deskripsi'        => $request->deskripsi,
-            'tanggal_pengambilan' => now(),
+        // Tambah log aktivitas
+        ActivityLog::create([
+            'id'          => uniqid('ACT'),
+            'nama_id'     => auth()->user()->nama_id,
+            'aktivitas'   => 'Pengeluaran Barang',
+            'keterangan'  => 'Mengeluarkan '.$request->jumlah.' stok untuk item '.$item->nama_item.' ('.$request->kode_item.') oleh '.$request->nama_pengambil,
         ]);
 
-        return response()->json(['message' => 'Barang berhasil diambil!', 'id' => $id], 201);
+        return redirect()->route('withdraw.index')->with('success', 'Barang keluar berhasil dicatat dan stok diperbarui!');
     }
 }

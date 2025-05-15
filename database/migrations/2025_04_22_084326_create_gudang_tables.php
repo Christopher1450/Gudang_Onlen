@@ -84,15 +84,15 @@ return new class extends Migration {
 
         // Tabel Activity Logs (Audit Trail)
         Schema::create('activity_logs', function (Blueprint $table) {
-            $table->string('id')->primary(); // Example: ACT001
-            $table->string('nama_id');
-            $table->string('aktivitas');
-            $table->text('keterangan')->nullable();
+            $table->string('id')->primary();                // contoh: ACT001
+            $table->string('nama_id');                      // foreign key ke users.nama_id
+            $table->string('aktivitas');                    // contoh: 'Tambah stok barang'
+            $table->text('keterangan')->nullable();        // deskripsi detail
             $table->timestamps();
-
+        
             $table->foreign('nama_id')->references('nama_id')->on('users')->onDelete('cascade');
         });
-    }
+    }        
 
     public function down(): void
     {
