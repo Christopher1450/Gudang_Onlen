@@ -10,7 +10,6 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        // Hapus semua factory()! Ganti dengan manual create:
         User::create([
             'nama_id'  => 'superadmin_001',
             'name'     => 'Super Admin',

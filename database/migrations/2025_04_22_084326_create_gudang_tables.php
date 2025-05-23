@@ -72,27 +72,27 @@ return new class extends Migration {
             $table->string('warna');
             $table->string('size');
             $table->integer('jumlah');
-            $table->string('nama_id');
+            $table->string('user_id');
             $table->string('nama_pengambil');
             $table->text('deskripsi')->nullable();
             $table->timestamp('tanggal_pengambilan');
             $table->timestamps();
 
             $table->foreign('kode_item')->references('kode_item')->on('items')->onDelete('cascade');
-            $table->foreign('nama_id')->references('nama_id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
 
         // Tabel Activity Logs (Audit Trail)
         Schema::create('activity_logs', function (Blueprint $table) {
-            $table->string('id')->primary();                // contoh: ACT001
-            $table->string('nama_id');                      // foreign key ke users.nama_id
-            $table->string('aktivitas');                    // contoh: 'Tambah stok barang'
-            $table->text('keterangan')->nullable();        // deskripsi detail
+            $table->string('id')->primary();
+            $table->string('user_id');
+            $table->string('aktivitas');
+            $table->text('keterangan')->nullable();
             $table->timestamps();
-        
-            $table->foreign('nama_id')->references('nama_id')->on('users')->onDelete('cascade');
+
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
         });
-    }        
+    }
 
     public function down(): void
     {

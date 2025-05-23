@@ -23,11 +23,11 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
-        return [
-            'Username' => 'Superadmin',
-            'password' => Hash::make('Superadmin123'),
-            'remember_token' => Str::random(10),
-        ];
+        // return [
+        //     'Username' => 'Superadmin',
+        //     'password' => Hash::make('Superadmin123'),
+        //     'remember_token' => Str::random(10),
+        // ];
     }
 
     /**

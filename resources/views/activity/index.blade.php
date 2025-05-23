@@ -1,7 +1,7 @@
-@extends('layouts.app')
+{{-- @extends(view: 'layouts.app') --}}
 
 @section('content')
-    <h2>📝 Log Aktivitas Gudang</h2>
+    <h2>Log Aktivitas Gudang</h2>
 
     {{-- Filter Form --}}
     <form action="{{ route('activity.index') }}" method="GET" class="row g-3 mb-3">

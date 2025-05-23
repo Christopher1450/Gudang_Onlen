@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('nama_id')->primary()->unique();      // ← PRIMARY pakai nama_id (misalnya: 'user_001')
-            $table->string('name')->nullable();          // ← name boleh null kalau mau
+            $table->string('user_id')->primary()->unique();
+            $table->string('name');
             $table->string('username')->unique();
             $table->string('password');
             $table->string('role')->default('user');
