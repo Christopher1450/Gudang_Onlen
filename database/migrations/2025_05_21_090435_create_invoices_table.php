@@ -8,7 +8,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('invoices', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('user_id')->unique();
             // $table->foreign('user_id')->references('user_id')->on('users')->cascadeOnDelete();
             $table->date('tanggal');

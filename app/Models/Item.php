@@ -6,21 +6,30 @@ use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
-    protected $primaryKey = 'kode_item';
-    public $incrementing = false; // Karena string, bukan auto increment
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'kode_item', 'nama_item', 'kategori_id', 'subkategori_id', 'warna', 'size', 'stok', 'minimum_stok'
+    'kode_item',
+    'nama_item',
+    'category_id',
+    'subcategory_name',
+    'supplier_name',
+    'stok',
+    'harga',
+    'warna',
+    'size'
     ];
 
     public function category()
     {
-        return $this->belongsTo(Category::class, 'kategori_id');
+        return $this->belongsTo(Category::class);
     }
 
     public function subcategory()
     {
-        return $this->belongsTo(Subcategory::class, 'subkategori_id');
+        return $this->belongsTo(Subcategory::class);
+    }
+
+    public function supplier()
+    {
+        return $this->belongsTo(Supplier::class);
     }
 }

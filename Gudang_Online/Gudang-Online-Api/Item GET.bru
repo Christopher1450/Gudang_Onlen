@@ -1,0 +1,23 @@
+meta {
+  name: Item GET
+  type: http
+  seq: 14
+}
+
+get {
+  url: http://127.0.0.1:8000/api/invoice
+  body: json
+  auth: none
+}
+
+headers {
+  ~Accept: application/json
+  ~Content-Type: application/json
+}
+
+body:json {
+  {
+    "username": "superadmin",
+    "password": "superpassword123"
+  }
+}

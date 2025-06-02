@@ -1,0 +1,30 @@
+meta {
+  name: Return Logs GET
+  type: http
+  seq: 14
+}
+
+get {
+  url: http://127.0.0.1:8000/api/invoices
+  body: json
+  auth: bearer
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI5MjY1LCJleHAiOjE3NDgzMzI4NjUsIm5iZiI6MTc0ODMyOTI2NSwianRpIjoiN0pIZjU3QUhUUXp5RkxrYyIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.pkvBdGxdNsA48gIjXgLduMYr1Oo7cWj5wZDq_sQziz0
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4NDAxNjg2LCJleHAiOjE3NDg0MDUyODYsIm5iZiI6MTc0ODQwMTY4NiwianRpIjoiN0dKOTlpSndrRTRrb2dUeiIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.QrvVWMXeaRfYfGmOXvynw_foyZiBLxJ_lWKo6SNUv40
+}
+
+body:json {
+  {
+    "user_id": "superadmin_001",
+      "tanggal": "2025-05-28 02:57:10",
+      "jumlah_item": "10",
+      "total_pembayaran": 50000,
+      "status": "Lunas"
+  }
+}

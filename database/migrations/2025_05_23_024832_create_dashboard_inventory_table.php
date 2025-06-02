@@ -19,8 +19,7 @@ return new class extends Migration
             $table->string('supplier')->nullable();
             $table->timestamp('last_restocked')->nullable();
             $table->timestamps();
-});
-
+        });
     }
 
     /**

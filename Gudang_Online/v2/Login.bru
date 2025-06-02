@@ -1,0 +1,23 @@
+meta {
+  name: Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://127.0.0.1:8000/api/login
+  body: json
+  auth: none
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI2NTMyLCJleHAiOjE3NDgzMzAxMzIsIm5iZiI6MTc0ODMyNjUzMiwianRpIjoiSDhBWU05NkY0R3ZLNFVNUiIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.TfqnPS3x9qJ70GKg-eglPnO9ZKGTI-bIlSd4ZEroHZk
+}
+
+body:json {
+  {
+   "username": "superadmin",
+    "password": "superpassword123"
+  }
+}

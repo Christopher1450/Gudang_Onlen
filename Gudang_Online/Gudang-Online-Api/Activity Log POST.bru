@@ -1,0 +1,29 @@
+meta {
+  name: Activity Log POST
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://127.0.0.1:8000/api/barang-masuk
+  body: json
+  auth: bearer
+}
+
+headers {
+  Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI2NTMyLCJleHAiOjE3NDgzMzAxMzIsIm5iZiI6MTc0ODMyNjUzMiwianRpIjoiSDhBWU05NkY0R3ZLNFVNUiIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.TfqnPS3x9qJ70GKg-eglPnO9ZKGTI-bIlSd4ZEroHZk
+  Accept: application/json
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI2NTMyLCJleHAiOjE3NDgzMzAxMzIsIm5iZiI6MTc0ODMyNjUzMiwianRpIjoiSDhBWU05NkY0R3ZLNFVNUiIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.TfqnPS3x9qJ70GKg-eglPnO9ZKGTI-bIlSd4ZEroHZk
+}
+
+body:json {
+  {
+      "kode_item": "abc001",
+      "jumlah": "1",
+      "supplier_id": "12345",
+      "tanggal_masuk": "26 May 2025"
+  }
+}

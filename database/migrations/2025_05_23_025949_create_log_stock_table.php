@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('log_stock', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('item_id')->constrained('dashboard_inventory')->cascadeOnDelete();
+            $table->string('nama_item')->constrained('dashboard_inventory')->cascadeOnDelete();
             $table->integer('quantity_change');
             $table->string('reason');
             $table->timestamp('date');

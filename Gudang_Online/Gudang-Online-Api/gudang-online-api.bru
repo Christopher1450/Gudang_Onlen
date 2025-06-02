@@ -1,0 +1,65 @@
+{
+  "type": "http-request-group",
+  "version": 1,
+  "name": "Gudang Online API",
+  "children": [
+    {
+      "type": "http-request",
+      "method": "POST",
+      "name": "Login",
+      "url": "http://localhost:8000/api/login",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "body": {
+        "mode": "json",
+        "json": {
+          "username": "admin123",
+          "password": "admin123"
+        }
+      },
+      "testScript": {
+        "script": "env.set('token', response.body.token);"
+      }
+    },
+    {
+      "type": "http-request",
+      "method": "GET",
+      "name": "Get Me",
+      "url": "http://localhost:8000/api/me",
+      "headers": {
+        "Authorization": "Bearer {{token}}"
+      }
+    },
+    {
+      "type": "http-request",
+      "method": "POST",
+      "name": "Barang Masuk",
+      "url": "http://localhost:8000/api/barang-masuk",
+      "headers": {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer {{token}}"
+      },
+      "body": {
+        "mode": "json",
+        "json": {
+          "kode_item": "BRG001",
+          "jumlah": 10,
+          "supplier_id": 1,
+          "deskripsi": "Restock barang",
+          "tanggal_masuk": "2024-05-25"
+        }
+      }
+    },
+    {
+      "type": "http-request",
+      "method": "POST",
+      "name": "Logout",
+      "url": "http://localhost:8000/api/logout",
+      "headers": {
+        "Authorization": "Bearer {{token}}"
+      }
+    }
+  ]
+}

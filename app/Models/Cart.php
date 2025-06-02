@@ -6,13 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cart extends Model
 {
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    protected $keyType = 'string';
-
     protected $fillable = [
-        'id', 'nama_id', 'kode_item', 'nama_item',
-        'warna', 'size', 'jumlah', 'deskripsi', 'gambar'
-    ];
-}
+        'user_id',
+        'kode_item',
+        'nama_item',
+        'warna',
+        'size',
+        'quantity',
+        'deskripsi',
+        'gambar',
+];
 
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+}

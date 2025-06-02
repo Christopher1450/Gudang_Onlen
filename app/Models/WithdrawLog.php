@@ -3,19 +3,41 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\Activitylog\LogOptions;
 
 class WithdrawLog extends Model
 {
-    protected $table = 'withdraw_logs';
+    use LogsActivity;
 
     protected $fillable = [
-        'id',
         'kode_item',
-        'jumlah',
+        'nama_item',
+        'warna',
+        'size',
         'user_id',
+        'nama_pengambil',
+        'quantity',
+        'tanggal_pengambilan',
         'deskripsi',
-        'tanggal_keluar',
     ];
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly([
+                'kode_item',
+                'nama_item',
+                'warna',
+                'size',
+                'user_id',
+                'nama_pengambil',
+                'quantity',
+                'tanggal_pengambilan'
+            ])
+            ->useLogName('withdraw_log')
+            ->logOnlyDirty();
+    }
 
     public function item()
     {
@@ -24,6 +46,6 @@ class WithdrawLog extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 }

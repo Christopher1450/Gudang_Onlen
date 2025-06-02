@@ -4,37 +4,32 @@ namespace App\Http\Controllers;
 
 use App\Models\ActivityLog;
 use Illuminate\Http\Request;
-use App\Exports\ActivityLogsExport;
-use Maatwebsite\Excel\Facades\Excel;
 
-class ActivityLogController extends Controller
+class ActivityLogController
 {
-    public function index(Request $request)
+    public function index()
     {
-        $query = ActivityLog::with('user')->latest();
+        $logs = ActivityLog::with('user')->latest()->paginate(20);
 
-        if ($request->filled('nama_id')) {
-            $query->where('nama_id', $request->nama_id);
-        }
-
-        if ($request->filled('tanggal')) {
-            $query->whereDate('created_at', $request->tanggal);
-        }
-
-        $logs = $query->paginate(10);
-        return view('activity.index', compact('logs'));
+        return response()->json([
+            'message' => 'Activity logs retrieved successfully.',
+            'data'    => $logs
+        ]);
     }
 
-    public function export(Request $request)
+    public function store(Request $request)
     {
-        $nama_id = $request->nama_id;
-        $tanggal = $request->tanggal;
-        $format  = $request->format ?? 'xlsx'; // default ke Excel
+        $validated = $request->validate([
+            'user_id'   => 'required|exists:users,user_id',
+            'activity' => 'required|string|max:255',
+            'waktu'     => 'nullable|date',
+        ]);
 
-        $fileName = 'log_aktivitas.' . $format;
+        $log = ActivityLog::create($validated);
 
-        $exportType = $format === 'csv' ? \Maatwebsite\Excel\Excel::CSV : \Maatwebsite\Excel\Excel::XLSX;
-
-        return Excel::download(new ActivityLogsExport($nama_id, $tanggal), $fileName, $exportType);
+        return response()->json([
+            'message' => 'Activity log created successfully.',
+            'data'    => $log
+        ], 201);
     }
 }

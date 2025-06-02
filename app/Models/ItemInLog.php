@@ -1,74 +1,31 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Models;
 
-use Illuminate\Http\Request;
-use App\Models\Item;
-use App\Models\ItemInLog;
+use Illuminate\Database\Eloquent\Model;
 
-class ItemInLogController extends Controller
+class ItemInLog extends Model
 {
-    public function index()
+    protected $fillable = [
+        'id',
+        'kode_item',
+        'quantity',
+        'supplier_name',
+        'supplier_id',
+        'deskripsi',
+        'tanggal_masuk'
+    ];
+
+    public $incrementing = false;
+    protected $keyType = 'string';
+
+    public function item()
     {
-        $logs = ItemInLog::with('item')->latest()->paginate(10);
-        return view('items.index', compact('logs'));
+        return $this->belongsTo(Item::class, 'kode_item', 'kode_item');
     }
 
-    public function create()
+    public function supplier()
     {
-        $items = Item::all();
-        return view('items.create', compact('items'));
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'kode_item'   => 'required|exists:items,kode_item',
-            'jumlah'      => 'required|integer|min:1',
-            'supplier_id' => 'required|exists:suppliers,id',
-            'deskripsi'   => 'nullable|string',
-            'tanggal_masuk' => 'required|date',
-        ]);
-
-        ItemInLog::create([
-            'id'            => uniqid('IN'), // ID format contoh IN654321
-            'kode_item'     => $request->kode_item,
-            'jumlah'        => $request->jumlah,
-            'supplier_id'   => $request->supplier_id,
-            'deskripsi'     => $request->deskripsi,
-            'tanggal_masuk' => $request->tanggal_masuk,
-        ]);
-
-        return redirect()->route('items.index')->with('success', 'Barang masuk berhasil dicatat!');
-    }
-    public function edit(ItemInLog $itemInLog)
-    {
-        $items = Item::all();
-        return view('items.edit', compact('itemInLog', 'items'));
-    }
-    public function update(Request $request, ItemInLog $itemInLog)
-    {
-        $request->validate([
-            'kode_item'   => 'required|exists:items,kode_item',
-            'jumlah'      => 'required|integer|min:1',
-            'supplier_id' => 'required|exists:suppliers,id',
-            'deskripsi'   => 'nullable|string',
-            'tanggal_masuk' => 'required|date',
-        ]);
-
-        $itemInLog->update([
-            'kode_item'     => $request->kode_item,
-            'jumlah'        => $request->jumlah,
-            'supplier_id'   => $request->supplier_id,
-            'deskripsi'     => $request->deskripsi,
-            'tanggal_masuk' => $request->tanggal_masuk,
-        ]);
-
-        return redirect()->route('items.index')->with('success', 'Barang masuk berhasil diperbarui!');
-    }
-    public function destroy(ItemInLog $itemInLog)
-    {
-        $itemInLog->delete();
-        return redirect()->route('items.index')->with('success', 'Barang masuk berhasil dihapus!');
+        return $this->belongsTo(Supplier::class);
     }
 }

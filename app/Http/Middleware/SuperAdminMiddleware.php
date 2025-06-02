@@ -9,7 +9,7 @@ class SuperAdminMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role !== 'super_admin') {
+        if (auth()->user()->role !== 'superadmin') {
             abort(403, 'Unauthorized');
         }
         return $next($request);

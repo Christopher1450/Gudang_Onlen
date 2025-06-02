@@ -1,0 +1,27 @@
+meta {
+  name: Me
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://127.0.0.1:8000/api/me
+  body: json
+  auth: bearer
+}
+
+headers {
+  Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzIxNDQwLCJleHAiOjE3NDgzMjUwNDAsIm5iZiI6MTc0ODMyMTQ0MCwianRpIjoia3dnV3lOcW1vb1prV2g5QSIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.kZ_-FmM8uo8P50BwiTf1vJy1shNLly1Cr9T0panHJjQ
+  Accept: application/json
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzIxNDQwLCJleHAiOjE3NDgzMjUwNDAsIm5iZiI6MTc0ODMyMTQ0MCwianRpIjoia3dnV3lOcW1vb1prV2g5QSIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.kZ_-FmM8uo8P50BwiTf1vJy1shNLly1Cr9T0panHJjQ
+}
+
+body:json {
+  {
+    "username": "superadmin",
+    "password": "superpassword123"
+  }
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Activity-logs GET copy
+  type: http
+  seq: 24
+}
+
+post {
+  url: http://127.0.0.1:8000/api/activity-logs
+  body: json
+  auth: bearer
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI5MjY1LCJleHAiOjE3NDgzMzI4NjUsIm5iZiI6MTc0ODMyOTI2NSwianRpIjoiN0pIZjU3QUhUUXp5RkxrYyIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.pkvBdGxdNsA48gIjXgLduMYr1Oo7cWj5wZDq_sQziz0
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4NTkyMjMzLCJleHAiOjE3NDg1OTU4MzMsIm5iZiI6MTc0ODU5MjIzMywianRpIjoiU2VKdWltZ0F0U2ttM3ZFNCIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.y23Y9DdlaYCDPML1OhmHZUsjiPu9r51zc8q5NklM040
+}
+
+body:json {
+  {
+    "user_id": "superadmin_001",
+    "aktivitas": "Gabut"
+  }
+}

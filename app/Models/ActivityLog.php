@@ -3,18 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\Models\Activity;
 
 class ActivityLog extends Model
 {
-    protected $table = 'activity_logs';
-    protected $primaryKey = 'id';
-    public $incrementing = false;
-    protected $keyType = 'string';
+    protected $fillable = [
+        'id',
+        'user_id',
+        'activity',
+        'description'
+    ];
+    // public $incrementing = false;
 
-    protected $fillable = ['id', 'nama_id', 'aktivitas', 'keterangan'];
+    // protected $keyType = 'string';
 
-        public function user()
-        {
-            return $this->belongsTo(\App\Models\User::class, 'nama_id', 'nama_id');
-        }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'user_id');
+    }
 }

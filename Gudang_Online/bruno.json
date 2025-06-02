@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Gudang_Online",
+  "type": "collection",
+  "ignore": [
+    "node_modules",
+    ".git"
+  ]
+}

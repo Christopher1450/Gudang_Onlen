@@ -37,7 +37,7 @@ class ActivityLogsExport implements FromQuery, WithHeadings
         return [
             'ID',
             'Nama ID',
-            'Aktivitas',
+            'Activity',
             'Keterangan',
             'Tanggal dan Jam',
         ];

@@ -1,0 +1,27 @@
+meta {
+  name: sub category POST
+  type: http
+  seq: 11
+}
+
+post {
+  url: http://127.0.0.1:8000/api/subcategory
+  body: json
+  auth: bearer
+}
+
+headers {
+  Accept: application/json
+  ~Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4MzI5MjY1LCJleHAiOjE3NDgzMzI4NjUsIm5iZiI6MTc0ODMyOTI2NSwianRpIjoiN0pIZjU3QUhUUXp5RkxrYyIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.pkvBdGxdNsA48gIjXgLduMYr1Oo7cWj5wZDq_sQziz0
+}
+
+auth:bearer {
+  token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzQ4NTgwNTc2LCJleHAiOjE3NDg1ODQxNzYsIm5iZiI6MTc0ODU4MDU3NiwianRpIjoiSlY1VWlYaVlBVWhoOFNOMyIsInN1YiI6InN1cGVyYWRtaW5fMDAxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.0t4sI-c85YtrwdRjKI4pNB8WzjBoaLQ0hfdiSxTHzqs
+}
+
+body:json {
+  {
+    "name": "T-Shirt",
+    "category_id": "1"
+  }
+}

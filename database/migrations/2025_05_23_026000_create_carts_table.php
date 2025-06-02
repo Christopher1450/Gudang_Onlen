@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('carts', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->id();
             $table->string('user_id');
             $table->string('kode_item');
             $table->string('nama_item');
             $table->string('warna');
             $table->string('size');
-            $table->integer('jumlah');
+            $table->integer('quantity');
             $table->text('deskripsi')->nullable();
             $table->string('gambar')->nullable();
             $table->timestamps();
@@ -26,7 +26,6 @@ return new class extends Migration
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->foreign('kode_item')->references('kode_item')->on('items')->onDelete('cascade');
         });
-
     }
 
     /**
